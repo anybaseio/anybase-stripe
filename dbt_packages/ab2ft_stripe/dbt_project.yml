@@ -1,0 +1,54 @@
+config-version: 2
+
+name: ab2ft_stripe
+version: 0.1.0
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+
+# Default for running on Splitgraph Cloud
+profile: splitgraph
+
+models:
+  stripe_source:
+    materialized: view
+  ab2ft_stripe:
+    materialized: ephemeral
+vars:
+  # Standard data flow:
+  # Fivetran Stripe schema -> fivetran/stripe_source -> fivetran/stripe
+  #
+  # Patch it to do:
+  # Airbyte Stripe schema -> splitgraph/ab2ft_stripe -> fivetran/stripe_source -> fivetran/stripe
+
+  # The payment_method stream doesn't seem to be replicated by Airbyte, so set this to False.
+  using_payment_method: False
+
+  stripe_source:
+    balance_transaction: '{{ ref(''ab2ft_stripe_balance_transaction'') }}'
+    card: '{{ ref(''ab2ft_stripe_card'') }}'
+    charge: '{{ ref(''ab2ft_stripe_charge'') }}'
+    customer: '{{ ref(''ab2ft_stripe_customer'') }}'
+    fee: '{{ ref(''ab2ft_stripe_fee'') }}'
+    payment_intent: '{{ ref(''ab2ft_stripe_payment_intent'') }}'
+    payment_method_card: '{{ ref(''ab2ft_stripe_payment_method_card'') }}'
+    payment_method: '{{ ref(''ab2ft_stripe_payment_method'') }}'
+    payout: '{{ ref(''ab2ft_stripe_payout'') }}'
+    refund: '{{ ref(''ab2ft_stripe_refund'') }}'
+    invoice_line_item: '{{ ref(''ab2ft_stripe_invoice_line_item'') }}'
+    invoice: '{{ ref(''ab2ft_stripe_invoice'') }}'
+    subscription: '{{ ref(''ab2ft_stripe_subscription'') }}'
+    plan: '{{ ref(''ab2ft_stripe_plan'') }}'
+    credit_note: '{{ ref(''ab2ft_stripe_credit_note'') }}'
+    credit_note_line_item: '{{ ref(''ab2ft_stripe_credit_note_line_item'') }}'
+
+  ab2ft_stripe:
+    airbyte_raw_subscriptions: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_subscriptions'') }}'
+    airbyte_raw_balance_transactions: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_balance_transactions'') }}'
+    airbyte_raw_invoices: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_invoices'') }}'
+    airbyte_raw_charges: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_charges'') }}'
+    airbyte_raw_payouts: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_payouts'') }}'
+    airbyte_raw_customer_balance_transactions: '{{ source(''airbyte_raw_stripe'',''_airbyte_raw_customer_balance_transactions'') }}'
+    airbyte_raw_customers: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_customers'') }}'
+    airbyte_raw_refunds: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_refunds'') }}'
+    airbyte_raw_payment_intents: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_payment_intents'') }}'
+    airbyte_raw_invoice_line_items: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_invoice_line_items'') }}'
+    airbyte_raw_plans: '{{ source(''airbyte_raw_stripe'', ''_airbyte_raw_plans'') }}'

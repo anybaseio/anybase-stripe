@@ -1,0 +1,17 @@
+version: 2
+sources:
+- name: airbyte_raw_stripe
+  database: "{{var ('stripe_database', target.database)}}"
+  schema: "{{var ('stripe_schema', 'airbyte-raw/stripe')}}"
+  tables:
+  - name: _airbyte_raw_subscriptions
+  - name: _airbyte_raw_balance_transactions
+  - name: _airbyte_raw_invoices
+  - name: _airbyte_raw_charges
+  - name: _airbyte_raw_payouts
+  - name: _airbyte_raw_customer_balance_transactions
+  - name: _airbyte_raw_customers
+  - name: _airbyte_raw_refunds
+  - name: _airbyte_raw_payment_intents
+  - name: _airbyte_raw_invoice_line_items
+  - name: _airbyte_raw_plans

@@ -1,0 +1,488 @@
+tables:
+- name: balance_transaction
+  stream: balance_transactions.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: available_on
+    source_name: available_on
+    cast: integer
+  - name: created
+    source_name: created
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: description
+    source_name: description
+  - name: exchange_rate
+    source_name: exchange_rate
+    cast: numeric
+  - name: fee
+    source_name: fee
+    cast: integer
+  - name: net
+    source_name: net
+    cast: integer
+  - name: source
+    source_name: source
+  - name: status
+    source_name: status
+  - name: type
+    source_name: type
+- name: card
+  stream: charges.json
+  path:
+  - card
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: brand
+    source_name: brand
+  - name: country
+    source_name: country
+  - name: created
+  - name: customer_id
+    source_name: customer
+  - name: name
+    source_name: name
+  - name: recipient
+  - name: funding
+    source_name: funding
+- name: charge
+  stream: charges.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: amount_refunded
+    source_name: amount_refunded
+    cast: integer
+  - name: application_fee_amount
+  - name: balance_transaction_id
+    source_name: balance_transaction
+  - name: captured
+    source_name: captured
+    cast: boolean
+  - name: card_id
+    source_name: card
+  - name: created
+    source_name: created
+    cast: integer
+  - name: customer_id
+    source_name: customer
+  - name: description
+    source_name: description
+  - name: failure_code
+    source_name: failure_code
+  - name: failure_message
+    source_name: failure_message
+  - name: metadata
+    source_name: metadata
+  - name: paid
+    source_name: paid
+    cast: boolean
+  - name: payment_intent_id
+    source_name: payment_intent
+  - name: receipt_email
+    source_name: receipt_email
+  - name: receipt_number
+    source_name: receipt_number
+  - name: refunded
+    source_name: refunded
+    cast: boolean
+  - name: status
+    source_name: status
+  - name: invoice_id
+    source_name: invoice
+  - name: currency
+    source_name: currency
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: customer
+  stream: customers.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: account_balance
+    source_name: account_balance
+    cast: integer
+  - name: created
+    source_name: created
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: default_card_id
+    source_name: default_card
+  - name: delinquent
+    source_name: delinquent
+    cast: boolean
+  - name: description
+    source_name: description
+  - name: email
+    source_name: email
+  - name: metadata
+    source_name: metadata
+  - name: shipping_address_city
+  - name: shipping_address_country
+  - name: shipping_address_line_1
+  - name: shipping_address_line_2
+  - name: shipping_address_postal_code
+  - name: shipping_address_state
+  - name: shipping_name
+  - name: shipping_phone
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: fee
+  stream: balance_transactions.json
+  path:
+  - fee
+  auto_columns:
+  - name: balance_transaction_id
+  - name: amount
+  - name: application
+  - name: currency
+  - name: description
+  - name: type
+- name: payment_intent
+  stream: payment_intents.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: amount_capturable
+    source_name: amount_capturable
+    cast: integer
+  - name: amount_received
+    source_name: amount_received
+    cast: integer
+  - name: application
+    source_name: application
+  - name: application_fee_amount
+    source_name: application_fee_amount
+    cast: integer
+  - name: canceled_at
+    source_name: canceled_at
+    cast: integer
+  - name: cancellation_reason
+    source_name: cancellation_reason
+  - name: capture_method
+    source_name: capture_method
+  - name: confirmation_method
+    source_name: confirmation_method
+  - name: currency
+    source_name: currency
+  - name: customer_id
+    source_name: customer
+  - name: description
+    source_name: description
+  - name: metadata
+    source_name: metadata
+  - name: payment_method_id
+    source_name: payment_method
+  - name: receipt_email
+    source_name: receipt_email
+  - name: statement_descriptor
+  - name: status
+    source_name: status
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: payment_method_card
+  auto_columns:
+  - name: payment_method_id
+  - name: brand
+  - name: funding
+- name: payment_method
+  stream: payment_intents.json
+  path:
+  - payment_method
+  auto_columns:
+  - name: id
+  - name: created
+  - name: customer_id
+  - name: metadata
+  - name: type
+  - name: livemode
+- name: payout
+  stream: payouts.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: arrival_date
+    source_name: arrival_date
+    cast: integer
+  - name: automatic
+    source_name: automatic
+    cast: boolean
+  - name: balance_transaction_id
+    source_name: balance_transaction
+  - name: created
+    source_name: created
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: description
+    source_name: description
+  - name: metadata
+    source_name: metadata
+  - name: method
+    source_name: method
+  - name: source_type
+    source_name: source_type
+  - name: status
+    source_name: status
+  - name: type
+    source_name: type
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: refund
+  stream: refunds.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: balance_transaction_id
+    source_name: balance_transaction
+  - name: charge_id
+    source_name: charge
+  - name: created
+    source_name: created
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: description
+  - name: metadata
+    source_name: metadata
+  - name: reason
+    source_name: reason
+  - name: receipt_number
+    source_name: receipt_number
+  - name: status
+    source_name: status
+- name: invoice_line_item
+  stream: invoice_line_items.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: invoice_id
+    source_name: invoice
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: description
+    source_name: description
+  - name: discountable
+    source_name: discountable
+    cast: boolean
+  - name: plan_id
+    source_name: plan
+  - name: proration
+    source_name: proration
+    cast: boolean
+  - name: quantity
+    source_name: quantity
+    cast: integer
+  - name: subscription_id
+    source_name: subscription
+  - name: subscription_item_id
+    source_name: subscription_item
+  - name: type
+    source_name: type
+  - name: unique_id
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: invoice
+  stream: invoices.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: amount_due
+    source_name: amount_due
+    cast: integer
+  - name: amount_paid
+    source_name: amount_paid
+    cast: integer
+  - name: amount_remaining
+    source_name: amount_remaining
+    cast: integer
+  - name: attempt_count
+    source_name: attempt_count
+    cast: integer
+  - name: auto_advance
+    source_name: auto_advance
+    cast: boolean
+  - name: billing_reason
+    source_name: billing_reason
+  - name: charge_id
+    source_name: charge
+  - name: created
+    source_name: created
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: customer_id
+    source_name: customer
+  - name: description
+    source_name: description
+  - name: due_date
+    source_name: due_date
+    cast: numeric
+  - name: metadata
+    source_name: metadata
+  - name: number
+    source_name: number
+  - name: paid
+    source_name: paid
+    cast: boolean
+  - name: receipt_number
+    source_name: receipt_number
+  - name: status
+    source_name: status
+  - name: subtotal
+    source_name: subtotal
+    cast: integer
+  - name: tax
+    source_name: tax
+    cast: integer
+  - name: tax_percent
+    source_name: tax_percent
+    cast: numeric
+  - name: total
+    source_name: total
+    cast: integer
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: subscription
+  stream: subscriptions.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: status
+    source_name: status
+  - name: billing
+    source_name: billing
+  - name: billing_cycle_anchor
+    source_name: billing_cycle_anchor
+    cast: numeric
+  - name: cancel_at
+  - name: cancel_at_period_end
+    source_name: cancel_at_period_end
+    cast: boolean
+  - name: canceled_at
+    source_name: canceled_at
+    cast: numeric
+  - name: created
+    source_name: created
+    cast: integer
+  - name: current_period_start
+    source_name: current_period_start
+    cast: integer
+  - name: current_period_end
+    source_name: current_period_end
+    cast: numeric
+  - name: customer_id
+    source_name: customer
+  - name: days_until_due
+    source_name: days_until_due
+    cast: integer
+  - name: metadata
+    source_name: metadata
+  - name: start_date
+  - name: ended_at
+    source_name: ended_at
+    cast: numeric
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: plan
+  stream: plans.json
+  path: []
+  auto_columns:
+  - name: id
+    source_name: id
+  - name: active
+    source_name: active
+    cast: boolean
+  - name: amount
+    source_name: amount
+    cast: integer
+  - name: currency
+    source_name: currency
+  - name: interval
+    source_name: interval
+  - name: interval_count
+    source_name: interval_count
+    cast: integer
+  - name: metadata
+    source_name: metadata
+  - name: nickname
+    source_name: nickname
+  - name: product
+    source_name: product
+  - name: livemode
+    source_name: livemode
+    cast: boolean
+- name: credit_note
+  stream: customer_balance_transactions.json
+  path:
+  - credit_note
+  auto_columns:
+  - name: id
+  - name: amount
+  - name: created
+  - name: currency
+  - name: discount_amount
+  - name: subtotal
+  - name: total
+  - name: livemode
+  - name: memo
+  - name: metadata
+  - name: number
+  - name: pdf
+  - name: reason
+  - name: status
+  - name: type
+  - name: voided_at
+  - name: customer_balance_transaction
+  - name: invoice_id
+  - name: refund_id
+- name: credit_note_line_item
+  auto_columns:
+  - name: id
+  - name: credit_note_id
+  - name: amount
+  - name: discount_amount
+  - name: description
+  - name: livemode
+  - name: quantity
+  - name: type
+  - name: unit_amount
+  - name: unit_amount_decimal
