@@ -15,16 +15,19 @@ mrr_with_changes as (
         *,
 
         coalesce(
-            lag(is_active,1) over (partition by customer_id order by date_month),
+            lag(is_active) over (partition by customer_id order by date_month),
             false
         ) as previous_month_is_active,
 
         coalesce(
-            lag(mrr,1) over (partition by customer_id order by date_month),
+            lag(mrr) over (partition by customer_id order by date_month),
             0
         ) as previous_month_mrr,
 
-        mrr - previous_month_mrr as mrr_change
+        mrr - coalesce(
+            lag(mrr) over (partition by customer_id order by date_month),
+            0
+        ) as mrr_change
 
     from unioned
 
