@@ -32,7 +32,7 @@ clean-targets: # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   anybase_stripe:
-    +schema: stripe_stripe
+    +schema: stripe
     +materialized: table
 
 vars:
