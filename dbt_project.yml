@@ -37,3 +37,21 @@ models:
 vars:
   ab2ft_stripe:
     stripe_schema: "stripe"
+
+  stripe_source:
+    balance_transaction: "{{ ref('ab2ft_stripe_balance_transaction') }}"
+    card: "{{ ref('ab2ft_stripe_card') }}"
+    charge: "{{ ref('ab2ft_stripe_charge') }}"
+    customer: "{{ ref('ab2ft_stripe_customer') }}"
+    fee: "{{ ref('ab2ft_stripe_fee') }}"
+    payment_intent: "{{ ref('ab2ft_stripe_payment_intent') }}"
+    payment_method_card: "{{ ref('ab2ft_stripe_payment_method_card') }}"
+    payment_method: "{{ ref('ab2ft_stripe_payment_method') }}"
+    payout: "{{ ref('ab2ft_stripe_payout') }}"
+    refund: "{{ ref('ab2ft_stripe_refund') }}"
+    invoice_line_item: "{{ ref('ab2ft_stripe_invoice_line_item') }}"
+    invoice: "{{ ref('ab2ft_stripe_invoice') }}"
+    subscription: "{{ ref('ab2ft_stripe_subscription') }}"
+    plan: "{{ ref('ab2ft_stripe_plan') }}"
+    credit_note: "{{ ref('ab2ft_stripe_credit_note') }}"
+    credit_note_line_item: "{{ ref('ab2ft_stripe_credit_note_line_item') }}"
