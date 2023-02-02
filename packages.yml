@@ -1,3 +1,5 @@
 packages:
-  - git: "https://github.com/anybaseio/stripe-dbt.git"
-    revision: 98d110d43da74c2d869f70b816f3f729c5e42d1f
+  # - git: "https://github.com/anybaseio/stripe-dbt.git"
+  #   revision: f5fa9fb0d8bcd74e983641dc02dc3e4fd1066ab7
+  - package: splitgraph/ab2ft_stripe
+    version: 0.1.0
