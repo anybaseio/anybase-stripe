@@ -56,9 +56,9 @@ joined as (
     left join subscription_periods
         on customer_months.customer_id = subscription_periods.customer_id
         -- month is after a subscription start date
-        and customer_months.date_month >= subscription_periods.current_period_start
+        and customer_months.date_month >= to_timestamp(subscription_periods.current_period_start)
         -- month is before a subscription end date (and handle null case)
-        and (customer_months.date_month < subscription_periods.current_period_end
+        and (customer_months.date_month < to_timestamp(subscription_periods.current_period_end)
                 or subscription_periods.current_period_end is null)
 
 ),
