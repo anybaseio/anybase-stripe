@@ -18,9 +18,10 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target" # directory which will store compiled SQL files
+target-path: "../build" # directory which will store compiled SQL files
+packages-install-path: "../dbt_packages"
 clean-targets: # directories to be removed by `dbt clean`
-  - "target"
+  - "build"
   - "dbt_packages"
 
 # Configuring models
@@ -34,6 +35,3 @@ models:
     +materialized: view
   ab2ft_stripe:
     +materialized: ephemeral
-
-vars:
-  modules-path: "../dbt_packages"
