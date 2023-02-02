@@ -14,7 +14,7 @@ months as (
 customers as (
 
     select
-        customer as customer_id,
+        customer_id,
         date_trunc('month', min(current_period_start)) as date_month_start,
         date_trunc('month', max(current_period_end)) as date_month_end
 
