@@ -72,11 +72,11 @@ final as (
         mrr > 0 as is_active,
 
         -- calculate first and last months
-        min(case when mrr >= 0 then date_month end) over (
+        min(date_month) over (
             partition by customer_id
         ) as first_active_month,
 
-        max(case when mrr >= 0 then date_month end) over (
+        max(date_month) over (
             partition by customer_id
         ) as last_active_month,
 
