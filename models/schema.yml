@@ -15,14 +15,14 @@ models:
   #     - dbt_utils.expression_is_true:
   #         expression: date_trunc('month', end_date) = end_date
 
-  - name: customer_revenue_by_month
+  - name: stripe__customer_revenue_by_month
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:
             - customer_id
             - date_month
 
-  - name: customer_churn_month
+  - name: stripe__customer_churn
     columns:
       - name: customer_id
         tests:

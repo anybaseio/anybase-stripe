@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: mrr
+  - name: stripe__mrr
     description: "This model represents one record per month, per account (months have been filled
 in to include any periods of inactivity).
 
