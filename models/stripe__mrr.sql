@@ -1,10 +1,10 @@
 with unioned as (
 
-    select * from {{ ref('customer_revenue_by_month') }}
+    select * from {{ ref('stripe__customer_revenue_by_month') }}
 
     union all
 
-    select * from {{ ref('customer_churn_month') }}
+    select * from {{ ref('stripe__customer_churn') }}
 
 ),
 

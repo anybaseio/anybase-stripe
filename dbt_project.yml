@@ -33,7 +33,7 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
   anybase_stripe:
     +schema: stripe_stripe
-    +materialized: view
+    +materialized: table
 
 vars:
   ab2ft_stripe:
