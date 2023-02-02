@@ -1,6 +1,6 @@
 with subscription_periods as (
 
-    select * from {{ ref('subscription_periods') }}
+    select * from {{ ref('ab2ft_stripe_subscription') }}
 
 ),
 
@@ -14,9 +14,9 @@ months as (
 customers as (
 
     select
-        customer_id,
-        date_trunc('month', min(start_date)) as date_month_start,
-        date_trunc('month', max(end_date)) as date_month_end
+        customer as customer_id,
+        date_trunc('month', min(current_period_start)) as date_month_start,
+        date_trunc('month', max(current_period_end)) as date_month_end
 
     from subscription_periods
 
@@ -49,17 +49,17 @@ joined as (
     select
         customer_months.date_month,
         customer_months.customer_id,
-        coalesce(subscription_periods.monthly_amount, 0) as mrr
+        coalesce(subscription_periods.plan->>'amount', 0) as mrr
 
     from customer_months
 
     left join subscription_periods
         on customer_months.customer_id = subscription_periods.customer_id
         -- month is after a subscription start date
-        and customer_months.date_month >= subscription_periods.start_date
+        and customer_months.date_month >= subscription_periods.current_period_start
         -- month is before a subscription end date (and handle null case)
-        and (customer_months.date_month < subscription_periods.end_date
-                or subscription_periods.end_date is null)
+        and (customer_months.date_month < subscription_periods.current_period_end
+                or subscription_periods.current_period_end is null)
 
 ),
 
