@@ -1,6 +1,6 @@
 {{ dbt_utils.date_spine(
     datepart="month",
-    start_date="2018-01-01",
-    end_date="date_trunc('month', current_date)"
+    start_date="cast('2018-01-01' as date)",
+    end_date="date_trunc('month', now())"
    )
 }}
