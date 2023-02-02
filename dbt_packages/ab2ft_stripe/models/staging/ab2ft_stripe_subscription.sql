@@ -41,7 +41,7 @@ SELECT
     "metadata",
     "start_date",
     "ended_at",
-    "livemode"
+    "livemode",
     "amount"
 FROM _tmp_dedup_pk
 WHERE _tmp_pk_row_number = 1
