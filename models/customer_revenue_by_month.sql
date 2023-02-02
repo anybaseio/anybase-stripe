@@ -78,7 +78,7 @@ final as (
 
         max(case when mrr > 0 then date_month end) over (
             partition by customer_id
-        ) as last_active_month,
+        ) as last_active_month
 
         -- calculate if this record is the first or last month
         -- first_active_month = date_month as is_first_month,
