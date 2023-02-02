@@ -49,7 +49,7 @@ joined as (
     select
         customer_months.date_month,
         customer_months.customer_id,
-        coalesce(subscription_periods.plan->>'amount', 0) as mrr
+        coalesce(subscription_periods.amount, 0) as mrr
 
     from customer_months
 
