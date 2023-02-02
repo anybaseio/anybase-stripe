@@ -17,7 +17,7 @@ SELECT
     cast({{ json_extract_scalar ("_airbyte_data", ['ended_at']) }} AS numeric) AS "ended_at",
     cast({{ json_extract_scalar ("_airbyte_data", ['livemode']) }} AS boolean) AS "livemode",
     _airbyte_emitted_at,
-    {{ json_extract_scalar("_airbyte_data", '$.plan.amount') }} as "amount"
+    {{ json_extract_scalar("_airbyte_data", ['plan']['amount']) }} as "amount"
 FROM {{ var('airbyte_raw_subscriptions') }}
 ), 
 _tmp_dedup_pk AS (
