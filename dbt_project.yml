@@ -34,3 +34,6 @@ models:
     +materialized: view
   ab2ft_stripe:
     +materialized: ephemeral
+
+vars:
+  modules-path: "../dbt_packages"
