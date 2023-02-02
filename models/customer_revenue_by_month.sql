@@ -15,8 +15,8 @@ customers as (
 
     select
         customer_id,
-        date_trunc('month', min(to_timestamp(current_period_start))) as date_month_start,
-        date_trunc('month', max(to_timestamp(current_period_end))) as date_month_end
+        date_trunc('month', to_timestamp(min(current_period_start))) as date_month_start,
+        date_trunc('month', to_timestamp(max(current_period_end))) as date_month_end
 
     from subscription_periods
 
