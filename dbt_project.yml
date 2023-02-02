@@ -33,7 +33,5 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
   anybase_stripe:
     +materialized: view
-  stripe_source:
-    +materialized: view
   ab2ft_stripe:
-    +materialized: ephemeral
+    +materialized: view
